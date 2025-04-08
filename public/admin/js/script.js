@@ -149,6 +149,8 @@ if (showAlert) {
 
 // Upload Image
 const uploadImage = document.querySelector("[upload-image]");
+console.log(uploadImage);
+
 if (uploadImage) {
   const uploadImageInput = uploadImage.querySelector("[upload-image-input]");
   const uploadImagePreview = uploadImage.querySelector("[upload-image-preview]");
@@ -160,3 +162,38 @@ if (uploadImage) {
   });
 }
 // End Upload Image
+
+// Sort
+const sort = document.querySelector("[sort]");
+console.log(sort);
+
+if (sort) {
+  const sortSelect = sort.querySelector("[sort-select]");
+  const sortClear = sort.querySelector("[sort-clear]");
+  let url = new URL(window.location.href);
+
+  sortSelect.addEventListener("change", (e) => {
+    const value = e.target.value;
+
+    const valueArr = value.split("-");
+    url.searchParams.set("sortKey", valueArr[0]);
+    url.searchParams.set("sortValue", valueArr[1]);
+    window.location.href = url;
+    sortSelect.value = value;
+  });
+  sortClear.addEventListener("click", () => {
+    url.searchParams.delete("sortKey");
+    url.searchParams.delete("sortValue");
+    window.location.href = url;
+  });
+  // Thêm selected cho option
+  const sortKey = url.searchParams.get("sortKey");
+  const sortValue = url.searchParams.get("sortValue");
+  if (sortKey && sortValue) {
+    const stringSort = `${sortKey}-${sortValue}`;
+    const optionSelected = sortSelect.querySelector(`option[value="${stringSort}"]`);
+    optionSelected.selected = true;
+  }
+}
+
+// End Sort
