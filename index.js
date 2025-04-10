@@ -36,7 +36,7 @@ app.use(flash());
 
 // TinyMCE
 const path = require("path");
-app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+app.use("/tinymce", express.static(path.join(__dirname, "node_modules", "tinymce")));
 // End TinyMCE
 
 //Thông báo nơi chứa view, cấu hình PUG vào dự án
